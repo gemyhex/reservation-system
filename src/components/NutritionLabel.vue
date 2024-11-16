@@ -26,18 +26,18 @@
     <hr class="section-divider x5"/>
 
     <div class="calories">
-      <h2 class="font-bolder">{{ $t('amountPerServing') }}</h2>
-      <h1 class="font-bolder d-flex justify-space-between align-center">
+      <h3 class="font-bolder">{{ $t('amountPerServing') }}</h3>
+      <h2 class="font-bolder d-flex justify-space-between align-center">
       <span>
         {{ $t('calories') }}
       </span>
         <span>
           {{ $i18n.locale === 'ar' ? ConvertToArabicNumbers(roundedCalories) : roundedCalories }}{{ $t('units.gram') }}
         </span>
-      </h1>
+      </h2>
     </div>
     <hr class="section-divider x4"/>
-    <h5 class="text-end">% {{ $t('dailyValue') }} *</h5>
+    <p class="text-end font-bold">% {{ $t('dailyValue') }} *</p>
     <hr class="section-divider"/>
     <div v-for="section in groupedNutrients" :key="section.key" class="section">
       <div
@@ -54,7 +54,7 @@
                 $i18n.locale === 'ar' ? ConvertToArabicNumbers(Math.round(nutrient.value)) : roundNumbers(nutrient.value.toFixed(1))
               }}{{ nutrient.unit ? displayName(nutrient.unit) : $t('units.gram') }}</span>
           </p>
-          <h5 class="font-bold">{{ nutrientDailyValue(nutrient) }}</h5>
+          <p class="font-bold">{{ nutrientDailyValue(nutrient) }}</p>
         </div>
         <hr class="section-divider" v-if="index < filteredNutrients(section.nutrients).length - 1"/>
       </div>

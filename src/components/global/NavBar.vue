@@ -5,7 +5,7 @@
         <img src="@/assets/images/logo.svg" alt="">
       </div>
 
-      <button @click="toggleLanguage">
+      <button @click="toggleLanguage" role="button" id="language-toggle" aria-label="language-toggle">
         <img src="@/assets/images/translate.svg" alt="">
       </button>
     </div>
