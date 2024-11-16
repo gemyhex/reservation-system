@@ -1,32 +1,32 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
+  <Layout>
     <router-view/>
-  </div>
+  </Layout>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import Layout from "@/layouts/defaultLayout.vue";
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  components: {
+    Layout,
+  },
+  data() {
+    return {
+      locale: localStorage.getItem('locale')
     }
+  },
+  watch: {
+    locale: {
+      handler(newLocale) {
+        document.body.setAttribute('dir', newLocale === 'ar' ? 'rtl' : 'ltr');
+      },
+      immediate: true,
+      deep: true,
+    }
+  },
+  mounted() {
+    this.$i18n.locale = localStorage.getItem('locale') || 'en'
   }
-}
-</style>
+};
+</script>
