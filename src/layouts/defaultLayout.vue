@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
     <!-- Navbar -->
-    <Navbar :is-arabic="isArabic" @toggle-language="toggleLanguage" />
+    <Navbar />
 
     <div class="layout-body">
 
@@ -19,18 +19,6 @@ import Navbar from "@/components/global/NavBar.vue";
 export default {
   components: {
     Navbar,
-  },
-  props: {
-    isArabic: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  emits: ["toggle-language"],
-  methods: {
-    toggleLanguage() {
-      this.$emit("toggle-language");
-    },
   },
 };
 </script>
