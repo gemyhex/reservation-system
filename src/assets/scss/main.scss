@@ -40,3 +40,24 @@ body {
 .text-end {
   text-align: end;
 }
+
+.section-divider {
+  border-top: 2px solid #000;
+  margin: 5px 0;
+
+  &.x2 {
+    border-top: 4px solid #000;
+  }
+
+  &.x3 {
+    border-top: 6px solid #000;
+  }
+
+  &.x4 {
+    border-top: 8px solid #000;
+  }
+
+  &.x5 {
+    border-top: 15px solid #000;
+  }
+}
