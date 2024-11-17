@@ -24,7 +24,6 @@ export default {
         document.body.setAttribute('dir', newLocale === 'ar' ? 'rtl' : 'ltr');
       },
       immediate: true,
-      deep: true,
     }
   },
   mounted() {

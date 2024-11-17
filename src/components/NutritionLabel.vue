@@ -2,16 +2,31 @@
   <div class="nutrition-label">
     <h1>{{ $t('nutritionFacts') }}</h1>
     <hr class="section-divider"/>
-    <NutrientHeading class="servings" :heading="useNumConverter(label.amounts.number_of_servings) + ' ' + $t('servingsPerContainer')" :contentTitle="$t('servingSize')" :content="useNumConverter(label.amounts.serving) + $t('units.gram')"></NutrientHeading>
+    <NutrientHeading
+        class="servings"
+        :heading="useNumConverter(label.amounts.number_of_servings) + ' ' + $t('servingsPerContainer')"
+        :contentTitle="$t('servingSize')"
+        :content="useNumConverter(label.amounts.serving) + $t('units.gram')"></NutrientHeading>
     <hr class="section-divider x5"/>
-    <NutrientHeading class="calories" :heading="$t('amountPerServing')" :contentTitle="$t('calories')" :content="useNumConverter(roundedCalories) + $t('units.gram')"></NutrientHeading>
+    <NutrientHeading
+        class="calories"
+        :heading="$t('amountPerServing')"
+        :contentTitle="$t('calories')"
+        :content="useNumConverter(roundedCalories) + $t('units.gram')"
+    ></NutrientHeading>
     <hr class="section-divider x4"/>
     <p class="text-end font-bold">% {{ $t('dailyValue') }} *</p>
     <hr class="section-divider"/>
     <div v-for="section in groupedNutrients" :key="section.key" class="section">
-      <SingleGroupItem v-for="(nutrient, index) in filteredNutrients(section.nutrients)"
-                       :key="nutrient.id" :nutrientsLength="filteredNutrients(section.nutrients).length" :index="index"
-                       :label="label" :section="section" :nutrient="nutrient"></SingleGroupItem>
+      <SingleGroupItem
+          v-for="(nutrient, index) in filteredNutrients(section.nutrients)"
+          :key="nutrient.id"
+          :nutrientsLength="filteredNutrients(section.nutrients).length"
+          :index="index"
+          :label="label"
+          :section="section"
+          :nutrient="nutrient"
+      ></SingleGroupItem>
       <hr class="section-divider x2"/>
     </div>
     <div class="disclaimer">
