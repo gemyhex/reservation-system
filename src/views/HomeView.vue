@@ -1,6 +1,6 @@
 <template>
-  <div class="grid-container">
-    <div class="nutrition-label-container">
+  <div class="w-50 flex-container justify-space-between border-sm rounded m-auto">
+    <div class="nutrition-label-container w-50">
       <NutritionLabel
           :label="label"
           :selected-nutrients="selectedNutrients"
@@ -8,8 +8,11 @@
       />
     </div>
 
-    <div class="nutrient-toggle-container">
+    <div class="vertical-divider"></div>
+
+    <div class="nutrient-toggle-container w-50">
       <NutrientToggle
+          :label="label"
           :nutrients="allNutrients"
           :selected="selectedNutrients"
           @update="updateSelectedNutrients"
@@ -66,9 +69,9 @@ export default {
 <style>
 .nutrition-label-container,
 .nutrient-toggle-container {
-  background-color: #f9f9f9;
-  padding: 15px;
-  border: 1px solid #ddd;
+  //background-color: #f9f9f9;
+  //padding: 15px;
+  //border: 1px solid #ddd;
   border-radius: 8px;
 }
 </style>

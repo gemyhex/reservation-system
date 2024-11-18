@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>{{ $t('allItems') }}</h3>
-    <div class="chip-container">
+    <div class="chip-container mb-2 border-sm pa-2 rounded">
       <div v-for="nutrient in nutrients" :key="nutrient.id" :class="{
           'chip selected': selected.includes(nutrient.id),
           'chip': !selected.includes(nutrient.id)

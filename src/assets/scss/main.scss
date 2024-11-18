@@ -13,10 +13,9 @@ body {
 }
 
 //Global Classes
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+.flex-container {
+  display: flex;
+  gap: 10px;
   padding: 20px;
 }
 
@@ -35,6 +34,9 @@ body {
 .justify-space-between {
   justify-content: space-between;
 }
+.justify-center {
+  justify-content: center;
+}
 
 .align-center {
   align-items: center;
@@ -44,8 +46,36 @@ body {
   margin-inline-start: 0.5rem;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.pa-2 {
+  padding: 0.5rem;
+}
+
 .text-end {
   text-align: end;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.m-auto {
+  margin: 0 auto;
+}
+.vertical-divider {
+  width: 1px;
+  height: 100%;
+  background: #000;
+}
+.border-sm {
+border: 1px solid;
+}
+
+.rounded {
+  border-radius: 0.5rem;
 }
 
 .section-divider {
