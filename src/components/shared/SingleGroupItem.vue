@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import { toRefs, computed } from "vue";
+import { toRefs } from "vue";
 import { useNumConverter } from "@/utils/useNumConverter";
 import { useNameOptions } from "@/utils/useNameView";
-
+import i18n from "@/plugins/i18n"
 export default {
   name: "SingleGroupItem",
   props: {
@@ -33,15 +33,12 @@ export default {
   },
   setup(props) {
     const { label } = toRefs(props);
-    const locale = computed(() => {
-      return window.$i18n?.locale || "en";
-    });
 
     const nutrientDailyValue = (sNutrient) => {
       const dailyValue = label.value.daily_value[sNutrient.name];
       if (dailyValue !== undefined) {
         const roundedValue = Math.round(dailyValue);
-        return locale.value === "ar"
+        return i18n.locale === "ar"
             ? `${useNumConverter(roundedValue)}%`
             : `${roundedValue}%`;
       }
