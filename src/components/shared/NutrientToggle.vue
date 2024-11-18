@@ -57,6 +57,7 @@ export default {
   color: #1f2937;
   padding: 8px 16px;
   border-radius: 9999px;
+  line-height: 100%;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
