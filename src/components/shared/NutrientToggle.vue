@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import {useNameOptions} from "@/utils/useNameView";
+import { useNameOptions } from "@/utils/useNameView";
 
 export default {
   props: {
@@ -25,19 +25,25 @@ export default {
     selected: {
       type: Array,
       required: true,
-    }
-  },
-  methods: {
-    useNameOptions,
-    toggleNutrient(nutrientId) {
-      const newSelected = this.selected.includes(nutrientId)
-          ? this.selected.filter((id) => id !== nutrientId)
-          : [...this.selected, nutrientId];
-      this.$emit("update", newSelected);
     },
+  },
+  setup(props, { emit }) {
+    const toggleNutrient = (nutrientId) => {
+      const newSelected = props.selected.includes(nutrientId)
+          ? props.selected.filter((id) => id !== nutrientId)
+          : [...props.selected, nutrientId];
+
+      emit("update", newSelected);
+    };
+
+    return {
+      useNameOptions,
+      toggleNutrient,
+    };
   },
 };
 </script>
+
 <style scoped>
 .chip-container {
   display: inline-flex;

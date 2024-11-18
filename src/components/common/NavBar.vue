@@ -13,16 +13,33 @@
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
+import i18n from '@/plugins/i18n'
+
 export default {
-  methods: {
-    toggleLanguage() {
-      this.$i18n.locale = this.$i18n.locale === "en" ? "ar" : "en";
-      localStorage.setItem('locale', this.$i18n.locale)
-      document.body.setAttribute('dir', this.$i18n.locale === 'ar' ? 'rtl' : 'ltr');
-    },
+  setup() {
+    const locale = ref(localStorage.getItem("locale") || "en");
+
+    const toggleLanguage = () => {
+      locale.value = locale.value === "en" ? "ar" : "en";
+      i18n.locale = locale.value;
+      localStorage.setItem("locale", locale.value);
+      document.body.setAttribute("dir", locale.value === "ar" ? "rtl" : "ltr");
+    };
+
+    onMounted(() => {
+      i18n.locale = locale.value;
+      document.body.setAttribute("dir", locale.value === "ar" ? "rtl" : "ltr");
+    });
+
+    return {
+      locale,
+      toggleLanguage,
+    };
   },
 };
 </script>
+
 
 <style lang="scss">
 .navbar-container {

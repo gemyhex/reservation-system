@@ -18,52 +18,48 @@
 </template>
 
 <script>
-import {useNumConverter} from "@/utils/useNumConverter";
-import {useNameOptions} from "@/utils/useNameView";
+import { toRefs, computed } from "vue";
+import { useNumConverter } from "@/utils/useNumConverter";
+import { useNameOptions } from "@/utils/useNameView";
 
 export default {
   name: "SingleGroupItem",
   props: {
-    nutrient: {
-      type: Object,
-      required: true
-    },
-    label: {
-      type: Object,
-      required: true
-    },
-    section: {
-      type: Object,
-      required: true
-    },
-    index: {
-      type: [Number, String],
-      required: true
-    },
-    nutrientsLength: {
-      type: [Number, String],
-      required: true
-    }
+    nutrient: { type: Object, required: true },
+    label: { type: Object, required: true },
+    section: { type: Object, required: true },
+    index: { type: [Number, String], required: true },
+    nutrientsLength: { type: [Number, String], required: true },
   },
-  methods: {
-    useNameOptions,
-    useNumConverter,
-    nutrientDailyValue(sNutrient) {
-      if (this.label.daily_value[sNutrient.name] !== undefined) {
-        if(this.$i18n.locale === 'ar') {
-          return this.useNumConverter(Math.round(this.label.daily_value[sNutrient.name])) + '%'
-        }
-        return Math.round(this.label.daily_value[sNutrient.name]) + '%'
+  setup(props) {
+    const { label } = toRefs(props);
+    const locale = computed(() => {
+      return window.$i18n?.locale || "en";
+    });
+
+    const nutrientDailyValue = (sNutrient) => {
+      const dailyValue = label.value.daily_value[sNutrient.name];
+      if (dailyValue !== undefined) {
+        const roundedValue = Math.round(dailyValue);
+        return locale.value === "ar"
+            ? `${useNumConverter(roundedValue)}%`
+            : `${roundedValue}%`;
       }
-      return null
-    },
-    roundNumbers(num) {
-      if (num == 0) return 0
-      return num > 1 ? Math.round(num) : num
-    },
-  }
-}
+      return null;
+    };
+
+    const roundNumbers = (num) => (num === '0.0' ? 0 : num > 1 ? Math.round(num) : num);
+
+    return {
+      useNameOptions,
+      useNumConverter,
+      nutrientDailyValue,
+      roundNumbers,
+    };
+  },
+};
 </script>
+
 
 <style scoped>
 

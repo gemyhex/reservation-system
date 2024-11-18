@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { ref, computed } from "vue";
 import NutritionLabel from "@/components/shared/NutritionLabel.vue";
 import NutrientToggle from "@/components/shared/NutrientToggle.vue";
 import mockData from "@/data/labels.json";
@@ -28,27 +29,40 @@ export default {
     NutritionLabel,
     NutrientToggle,
   },
-  data() {
-    const allNutrients = Object.values(mockData.label.serving).map((nutrient) => ({
-      id: nutrient.id,
-      name: nutrient.name,
-      name_ar: nutrient.name_ar,
-      enabled: nutrient.enabled === 1,
-    }));
+  setup() {
+    const label = ref(mockData.label);
+    const allNutrients = ref(
+        Object.values(mockData.label.serving).map((nutrient) => ({
+          id: nutrient.id,
+          name: nutrient.name,
+          name_ar: nutrient.name_ar,
+          enabled: nutrient.enabled === 1,
+        }))
+    );
+
+    const selectedNutrients = ref(
+        allNutrients.value.filter((nutrient) => nutrient.enabled).map((n) => n.id)
+    );
+
+    const updateSelectedNutrients = (newSelected) => {
+      selectedNutrients.value = newSelected;
+    };
+
+    const enabledNutrients = computed(() =>
+        allNutrients.value.filter((nutrient) => selectedNutrients.value.includes(nutrient.id))
+    );
 
     return {
-      label: mockData.label,
+      label,
       allNutrients,
-      selectedNutrients: allNutrients.filter((nutrient) => nutrient.enabled).map((n) => n.id),
+      selectedNutrients,
+      updateSelectedNutrients,
+      enabledNutrients,
     };
-  },
-  methods: {
-    updateSelectedNutrients(newSelected) {
-      this.selectedNutrients = newSelected;
-    },
   },
 };
 </script>
+
 <style>
 .nutrition-label-container,
 .nutrient-toggle-container {

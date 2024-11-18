@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import {computed, toRefs} from "vue";
 import SingleGroupItem from "@/components/shared/SingleGroupItem.vue";
 import {useNumConverter} from "@/utils/useNumConverter";
 import NutrientHeading from "@/components/shared/NutrientHeading.vue";
@@ -52,15 +53,18 @@ export default {
       required: true,
     },
   },
-  computed: {
-    enabledNutrients() {
-      return Object.values(this.label.serving).filter((nutrient) =>
-          this.selectedNutrients.includes(nutrient.id)
-      );
-    },
-    groupedNutrients() {
+  setup(props) {
+    const {label, selectedNutrients} = toRefs(props);
+
+    const enabledNutrients = computed(() =>
+        Object.values(label.value.serving).filter((nutrient) =>
+            selectedNutrients.value.includes(nutrient.id)
+        )
+    );
+
+    const groupedNutrients = computed(() => {
       const groups = {};
-      this.enabledNutrients.forEach((nutrient) => {
+      enabledNutrients.value.forEach((nutrient) => {
         if (!groups[nutrient.section]) groups[nutrient.section] = [];
         groups[nutrient.section].push(nutrient);
       });
@@ -68,22 +72,28 @@ export default {
         key,
         nutrients: nutrients.sort((a, b) => a.order - b.order),
       }));
-    },
-    roundedCalories() {
-      return Math.round(this.label.serving.Calories.value);
-    },
-  },
-  methods: {
-    useNumConverter,
-    filteredNutrients(nutrients) {
-      if (Array.isArray(nutrients)) {
-        return nutrients.filter(nutrient => nutrient.name !== 'Calories');
-      }
-      return [];
-    },
+    });
+
+    const roundedCalories = computed(() =>
+        Math.round(label.value.serving.Calories.value)
+    );
+
+    const filteredNutrients = (nutrients) =>
+        Array.isArray(nutrients)
+            ? nutrients.filter((nutrient) => nutrient.name !== "Calories")
+            : [];
+
+    return {
+      useNumConverter,
+      enabledNutrients,
+      groupedNutrients,
+      roundedCalories,
+      filteredNutrients,
+    };
   },
 };
 </script>
+
 
 <style lang="scss">
 .nutrition-label {
@@ -100,7 +110,7 @@ export default {
   }
 }
 
-.servings{
+.servings {
   h1 {
     font-size: medium;
     font-weight: 500;
