@@ -95,7 +95,8 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style lang="scss"  >
+
 .nutrition-label {
   max-width: 350px;
   border: 1px solid #000;
@@ -103,12 +104,12 @@ export default {
   background: #FFF;
 }
 
-.calories {
-  h1 {
-    font-size: x-large;
-    font-weight: 700;
+  .calories {
+    h1 {
+      font-size: x-large;
+      font-weight: 700;
+    }
   }
-}
 
 .servings {
   h1 {
@@ -121,4 +122,5 @@ export default {
   margin-top: 10px;
   font-size: 12px;
 }
+
 </style>
