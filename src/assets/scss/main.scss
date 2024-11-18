@@ -13,6 +13,13 @@ body {
 }
 
 //Global Classes
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -59,5 +66,13 @@ body {
 
   &.x5 {
     border-top: 15px solid #000;
+  }
+}
+
+
+//Media Queries
+@media (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: 1fr;
   }
 }

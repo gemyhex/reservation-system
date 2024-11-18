@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import NutritionLabel from "@/components/NutritionLabel.vue";
-import NutrientToggle from "@/components/NutrientToggle.vue";
+import NutritionLabel from "@/components/shared/NutritionLabel.vue";
+import NutrientToggle from "@/components/shared/NutrientToggle.vue";
 import mockData from "@/data/labels.json";
 
 export default {
@@ -50,13 +50,6 @@ export default {
 };
 </script>
 <style>
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
-
 .nutrition-label-container,
 .nutrient-toggle-container {
   background-color: #f9f9f9;
@@ -64,18 +57,4 @@ export default {
   border: 1px solid #ddd;
   border-radius: 8px;
 }
-
-.nutrition-label-container {
-
-}
-
-.nutrient-toggle-container {
-}
-
-@media (max-width: 600px) {
-  .grid-container {
-    grid-template-columns: 1fr;
-  }
-}
-
 </style>

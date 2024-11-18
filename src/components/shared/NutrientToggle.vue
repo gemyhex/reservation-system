@@ -7,13 +7,15 @@
           'chip': !selected.includes(nutrient.id)
         }"
            @click="toggleNutrient(nutrient.id)">
-        {{ displayName(nutrient) ?? '---' }}
+        {{ useNameOptions(nutrient) }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import {useNameOptions} from "@/utils/useNameView";
+
 export default {
   props: {
     nutrients: {
@@ -26,9 +28,7 @@ export default {
     }
   },
   methods: {
-    displayName(nutrient) {
-      return this.$i18n.locale === "ar" ? nutrient.name_ar : nutrient.name;
-    },
+    useNameOptions,
     toggleNutrient(nutrientId) {
       const newSelected = this.selected.includes(nutrientId)
           ? this.selected.filter((id) => id !== nutrientId)

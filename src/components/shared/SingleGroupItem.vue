@@ -7,7 +7,9 @@
     <div class="d-flex justify-space-between align-center">
       <p>
         <span class="font-bold">{{ useNameOptions(nutrient) }}</span>
-        <span class="ms-2">{{ useNumConverter(roundNumbers(nutrient.value.toFixed(1))) }}{{ nutrient.unit ? useNameOptions(nutrient.unit) : $t('units.gram') }}</span>
+        <span class="ms-2">{{
+            useNumConverter(roundNumbers(nutrient.value.toFixed(1)))
+          }}{{ nutrient.unit ? useNameOptions(nutrient.unit) : $t('units.gram') }}</span>
       </p>
       <p class="font-bold">{{ nutrientDailyValue(nutrient) }}</p>
     </div>
@@ -47,7 +49,13 @@ export default {
     useNameOptions,
     useNumConverter,
     nutrientDailyValue(sNutrient) {
-      return this.label.daily_value[sNutrient.name] !== undefined ? this.$i18n.locale === 'ar' ? this.useNumConverter(Math.round(this.label.daily_value[sNutrient.name])) + '%' : Math.round(this.label.daily_value[sNutrient.name]) + '%' : null
+      if (this.label.daily_value[sNutrient.name] !== undefined) {
+        if(this.$i18n.locale === 'ar') {
+          return this.useNumConverter(Math.round(this.label.daily_value[sNutrient.name])) + '%'
+        }
+        return Math.round(this.label.daily_value[sNutrient.name]) + '%'
+      }
+      return null
     },
     roundNumbers(num) {
       if (num == 0) return 0

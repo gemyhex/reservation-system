@@ -36,9 +36,9 @@
 </template>
 
 <script>
-import SingleGroupItem from "@/components/SingleGroupItem.vue";
+import SingleGroupItem from "@/components/shared/SingleGroupItem.vue";
 import {useNumConverter} from "@/utils/useNumConverter";
-import NutrientHeading from "@/components/NutrientHeading.vue";
+import NutrientHeading from "@/components/shared/NutrientHeading.vue";
 
 export default {
   components: {NutrientHeading, SingleGroupItem},
@@ -93,8 +93,15 @@ export default {
   background: #FFF;
 }
 
-.servings {
-  h3 {
+.calories {
+  h1 {
+    font-size: x-large;
+    font-weight: 700;
+  }
+}
+
+.servings{
+  h1 {
     font-size: medium;
     font-weight: 500;
   }
