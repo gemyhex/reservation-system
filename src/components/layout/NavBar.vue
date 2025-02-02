@@ -6,6 +6,7 @@
       </div>
       <button
           v-if="activeBranches.length"
+          :disabled="isLoading"
           @click="disableAllReservations"
           class="disable-all"
       >
@@ -22,20 +23,28 @@ export default {
       return this.$store.getters['branches/activeBranches']
     }
   },
-    methods: {
-      async disableAllReservations() {
-        try {
-          await Promise.all(this.activeBranches.map(branch =>
-              this.$store.dispatch('branches/updateBranch', {
-                id: branch.id,
-                payload: {accepts_reservations: false}
-              })
-          ))
-        } catch (error) {
-          alert('Failed to disable reservations')
-        }
+  data() {
+    return {
+      isLoading: false
+    }
+  },
+  methods: {
+    async disableAllReservations() {
+      this.isLoading = true
+      try {
+        await Promise.all(this.activeBranches.map(branch =>
+            this.$store.dispatch('branches/updateBranch', {
+              id: branch.id,
+              payload: {accepts_reservations: false}
+            })
+        ))
+      } catch (error) {
+        alert('Failed to disable reservations')
+      } finally {
+        this.isLoading = false
       }
     }
+  }
 };
 </script>
 

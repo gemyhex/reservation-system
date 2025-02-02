@@ -109,14 +109,19 @@
     </template>
 
     <template #footer>
-      <button @click="close" class="btn btn-cancel">Cancel</button>
-      <button
-          @click="saveSettings"
-          class="btn btn-save"
-          :disabled="isLoading"
-      >
-        {{ isLoading ? 'Saving...' : 'Save Settings' }}
-      </button>
+      <div class="footer-actions">
+        <button @click="disableReservations" :disabled="isLoading" class="btn btn-cancel-reservation">Disable Reservations</button>
+        <div class="actions_btns">
+          <button @click="close" class="btn btn-cancel">Cancel</button>
+          <button
+              @click="saveSettings"
+              class="btn btn-save"
+              :disabled="isLoading"
+          >
+            {{ isLoading ? 'Saving...' : 'Save Settings' }}
+          </button>
+        </div>
+      </div>
     </template>
   </AppModal>
 </template>
@@ -242,13 +247,29 @@ export default {
       this.timeSlots[day].splice(index, 1);
     },
     applyToAll() {
-      const firstDaySlots = this.timeSlots.friday;
+      const firstDaySlots = this.timeSlots.saturday;
       if (firstDaySlots.length > 0) {
         for (const day of this.days) {
-          if (day.value !== 'friday') {
+          if (day.value !== 'saturday') {
             this.timeSlots[day.value] = JSON.parse(JSON.stringify(firstDaySlots));
           }
         }
+      }
+    },
+    async disableReservations() {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch('branches/updateBranch', {
+          id: this.branch.id,
+          payload: {
+            accepts_reservations: false
+          },
+        });
+        this.close();
+      } catch (error) {
+        alert('Failed to disable reservations');
+      } finally {
+        this.isLoading = false;
       }
     },
     async saveSettings() {
@@ -275,3 +296,16 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.footer-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.actions_btns {
+  display: flex;
+  gap: 10px;
+}
+</style>

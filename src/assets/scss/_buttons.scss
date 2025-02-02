@@ -42,3 +42,13 @@ button {
     color: $danger-color;
   }
 }
+
+.btn-cancel-reservation {
+  @include button(transparent, $text-muted, transparent);
+
+  color: $danger-color;
+
+  &:hover {
+    background: #fecaca;
+  }
+}
