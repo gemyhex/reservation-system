@@ -41,13 +41,12 @@
         <p v-else>No available tables</p>
       </div>
 
-      <div class="section duration-input">
+      <div class="section duration-input mt-5">
         <h3 class="section-title">Reservation Duration</h3>
         <input
             type="number"
             v-model="reservationDuration"
             placeholder="Enter duration in minutes"
-            class="duration-input"
         />
       </div>
 
@@ -307,5 +306,8 @@ export default {
 .actions_btns {
   display: flex;
   gap: 10px;
+}
+.duration-input {
+  margin-top: 20px;
 }
 </style>
