@@ -1,77 +1,51 @@
 <template>
-  <div class="w-50 flex-container justify-space-between border-sm rounded m-auto">
-    <div class="nutrition-label-container w-50">
-      <NutritionLabel
-          :label="label"
-          :selected-nutrients="selectedNutrients"
-          @update-selected-nutrients="updateSelectedNutrients"
-      />
+  <div class="container">
+    <div class="header">
+      <h1>Branch Reservations</h1>
+      <div class="header-actions">
+        <button @click="openAddBranches">Add Branches</button>
+      </div>
     </div>
+    <BranchList :branches="activeBranches" :is-loading="isLoading" @edit="openSettings"/>
 
-    <div class="vertical-divider"></div>
-
-    <div class="nutrient-toggle-container w-50">
-      <NutrientToggle
-          :label="label"
-          :nutrients="allNutrients"
-          :selected="selectedNutrients"
-          @update="updateSelectedNutrients"
-      />
-    </div>
+    <!--    Modals -->
+    <AddBranchModal :isOpen="AddBranchDialog" @close="AddBranchDialog = false"/>
+    <ReservationSettingsModal :branch="currentBranch" :isOpen="BranchSettingsDialog" @close="BranchSettingsDialog = false" />
   </div>
 </template>
 
 <script>
-import { ref, computed } from "vue";
-import NutritionLabel from "@/components/shared/NutritionLabel.vue";
-import NutrientToggle from "@/components/shared/NutrientToggle.vue";
-import mockData from "@/data/labels.json";
+import AddBranchModal from '@/components/shared/AddBranchesModal.vue'
+import ReservationSettingsModal from '@/components/shared/ReservationSettingsModal.vue'
+import BranchList from '@/components/shared/BranchList'
 
 export default {
-  components: {
-    NutritionLabel,
-    NutrientToggle,
+  components: {BranchList, AddBranchModal, ReservationSettingsModal},
+  computed: {
+    activeBranches() {
+      return this.$store.getters['branches/activeBranches']
+    }
   },
-  setup() {
-    const label = ref(mockData.label);
-    const allNutrients = ref(
-        Object.values(mockData.label.serving).map((nutrient) => ({
-          id: nutrient.id,
-          name: nutrient.name,
-          name_ar: nutrient.name_ar,
-          enabled: nutrient.enabled === 1,
-        }))
-    );
-
-    const selectedNutrients = ref(
-        allNutrients.value.filter((nutrient) => nutrient.enabled).map((n) => n.id)
-    );
-
-    const updateSelectedNutrients = (newSelected) => {
-      selectedNutrients.value = newSelected;
-    };
-
-    const enabledNutrients = computed(() =>
-        allNutrients.value.filter((nutrient) => selectedNutrients.value.includes(nutrient.id))
-    );
-
+  data() {
     return {
-      label,
-      allNutrients,
-      selectedNutrients,
-      updateSelectedNutrients,
-      enabledNutrients,
-    };
+      currentBranch: {},
+      isLoading: true,
+      AddBranchDialog: false,
+      BranchSettingsDialog: false,
+    }
   },
-};
-</script>
+  created() {
+    this.$store.dispatch('branches/fetchBranches').then(() => this.isLoading = false)
+  },
+  methods: {
+    openAddBranches() {
+      this.AddBranchDialog = true
+    },
+    openSettings(branch) {
+      this.currentBranch = branch
+      this.BranchSettingsDialog = true
+    },
 
-<style>
-.nutrition-label-container,
-.nutrient-toggle-container {
-  //background-color: #f9f9f9;
-  //padding: 15px;
-  //border: 1px solid #ddd;
-  border-radius: 8px;
+  }
 }
-</style>
+</script>

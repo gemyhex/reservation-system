@@ -1,0 +1,45 @@
+.branch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75rem;
+  padding: 0 1rem;
+}
+
+.branch-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: $spacing-md;
+  background: $background-color;
+  border-radius: $border-radius-md;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background: darken($background-color, 5%);
+  }
+
+  &.selected {
+    border-color: $primary-color;
+    background: $primary-color;
+    color: white;
+
+    .branch-reference {
+      color: rgba(white, 0.8);
+    }
+  }
+}
+
+.branch-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.branch-reference {
+  font-size: 0.75rem;
+  color: $text-muted;
+  margin-top: $spacing-xs;
+}

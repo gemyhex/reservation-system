@@ -1,0 +1,31 @@
+input {
+  @include input;
+}
+
+.form-group {
+  margin-bottom: $spacing-md;
+}
+
+.form-actions {
+  margin-top: $spacing-md;
+  text-align: right;
+}
+
+.search-box {
+  padding: 0 $spacing-md;
+  margin-bottom: $spacing-md;
+}
+
+.search-input {
+  @include input;
+  width: 100%;
+}
+
+.working-hours-hint {
+  margin-bottom: $spacing-md;
+  padding: $spacing-md;
+  border-block-start: 1px solid $primary-color;
+  border-block-end: 1px solid $primary-color;
+  background: rgba($primary-color, 0.1);
+  color: $primary-color;
+}

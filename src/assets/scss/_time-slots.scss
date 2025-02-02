@@ -1,0 +1,117 @@
+.tables-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.table-slot {
+  padding: $spacing-sm;
+  border-radius: $border-radius-md;
+  border: 1px solid $primary-color;
+}
+
+.time-slots_container {
+  @include grid(3, $spacing-md);
+}
+
+.day-slot {
+  padding: $spacing-md;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-md;
+}
+
+.day-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-sm;
+}
+
+.day-title {
+  font-size: 1rem;
+  color: $text-color;
+  font-weight: 700;
+}
+
+.btn-apply-all {
+  background: transparent;
+  border: none;
+  color: $primary-color;
+  text-transform: lowercase;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.slot-container {
+  display: flex;
+  gap: $spacing-sm;
+  border-radius: $border-radius-sm;
+  border: 1px solid $border-color;
+  padding: $spacing-sm;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.time-slot {
+  position: relative;
+}
+
+.time-slot-input {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  background: white;
+  border: 1px solid $primary-color;
+  border-radius: $border-radius-sm;
+  padding: $spacing-sm;
+  flex: 1;
+  transition: border-color 0.2s;
+
+  &:focus-within {
+    border-color: $secondary-color;
+    box-shadow: 0 0 0 2px rgba($secondary-color, 0.1);
+  }
+}
+.day-slots {
+  margin: $spacing-md 0;
+}
+.time-input {
+  width: 50px;
+  text-align: center;
+  border: none;
+  background: transparent;
+  font-size: 0.875rem;
+  color: $text-color;
+  padding: $spacing-xs;
+}
+
+.time-input::placeholder {
+  color: $text-muted;
+}
+
+.time-separator {
+  color: $text-muted;
+}
+
+.btn-remove {
+  @include button(#ccc, $text-muted, #ccc);
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -8px;
+  right: -5px;
+
+  &:hover {
+    background: #fecaca;
+    color: $danger-color;
+  }
+}

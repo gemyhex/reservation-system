@@ -1,0 +1,24 @@
+.no-results,
+.loading {
+  padding: $spacing-lg;
+  text-align: center;
+  color: $text-muted;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-md;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-lg;
+}
+
+.header-actions {
+  display: flex;
+  gap: $spacing-sm;
+}

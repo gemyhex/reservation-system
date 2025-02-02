@@ -1,0 +1,44 @@
+button {
+  @include button($primary-color, white, $primary-color);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(45deg) translateY(-100%);
+    transition: transform 1s ease;
+  }
+
+  &:hover::before {
+    transform: rotate(45deg) translateY(400%);
+  }
+}
+
+.btn-cancel {
+  @include button($danger-color, white, $danger-color);
+}
+
+.btn-remove {
+  @include button(#ccc, $text-muted, #ccc);
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -8px;
+  right: -5px;
+
+  &:hover {
+    background: #fecaca;
+    color: $danger-color;
+  }
+}

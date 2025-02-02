@@ -1,0 +1,39 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: $spacing-lg 0;
+  font-size: 0.9em;
+  min-width: 400px;
+  border-radius: $border-radius-sm $border-radius-sm 0 0;
+  overflow: hidden;
+  box-shadow: $shadow-md;
+}
+
+table thead tr {
+  background-color: $secondary-color;
+  color: white;
+  text-align: left;
+  font-weight: bold;
+}
+
+table th,
+table td {
+  padding: $spacing-sm $spacing-md;
+}
+
+table tbody tr {
+  border-bottom: 1px solid $border-color;
+}
+
+table tbody tr:nth-of-type(even) {
+  background-color: $background-color;
+}
+
+table tbody tr:last-of-type {
+  border-bottom: 2px solid $secondary-color;
+}
+
+table tbody tr.active-row {
+  font-weight: bold;
+  color: $secondary-color;
+}

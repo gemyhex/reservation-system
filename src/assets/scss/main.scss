@@ -1,4 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&display=swap');
+@import 'variables';
+@import 'mixins';
+@import 'buttons';
+@import 'forms';
+@import 'tables';
+@import 'dropdown';
+@import 'utilities';
+@import 'branch-card';
+@import 'time-slots';
 
 * {
   padding: 0;
@@ -9,100 +18,5 @@
 body {
   padding: 0;
   margin: 0;
-  font-family: "Roboto", "Noto Sans Arabic", sans-serif;
-}
-
-//Global Classes
-.flex-container {
-  display: flex;
-  gap: 10px;
-  padding: 20px;
-}
-
-.font-bold {
-  font-weight: 700;
-}
-
-.font-bolder {
-  font-weight: 900;
-}
-
-.d-flex {
-  display: flex;
-}
-
-.justify-space-between {
-  justify-content: space-between;
-}
-.justify-center {
-  justify-content: center;
-}
-
-.align-center {
-  align-items: center;
-}
-
-.ms-2 {
-  margin-inline-start: 0.5rem;
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
-
-.pa-2 {
-  padding: 0.5rem;
-}
-
-.text-end {
-  text-align: end;
-}
-
-.w-50 {
-  width: 50%;
-}
-
-.m-auto {
-  margin: 0 auto;
-}
-.vertical-divider {
-  width: 1px;
-  height: 100%;
-  background: #000;
-}
-.border-sm {
-border: 1px solid;
-}
-
-.rounded {
-  border-radius: 0.5rem;
-}
-
-.section-divider {
-  border-top: 2px solid #000;
-  margin: 5px 0;
-
-  &.x2 {
-    border-top: 4px solid #000;
-  }
-
-  &.x3 {
-    border-top: 6px solid #000;
-  }
-
-  &.x4 {
-    border-top: 8px solid #000;
-  }
-
-  &.x5 {
-    border-top: 15px solid #000;
-  }
-}
-
-
-//Media Queries
-@media (max-width: 600px) {
-  .grid-container {
-    grid-template-columns: 1fr;
-  }
+  font-family: $font-family-primary, $font-family-secondary, sans-serif;
 }
